@@ -25,4 +25,23 @@ public class Files {
         }
         return files;
     }
+
+    /**
+     * 创建文件读写器
+     * @param param 参数
+     *              key：地址
+     *              val：数字序列
+     * @return 文件数组
+     */
+    public static QueuedFileAdapter[] createQuedFiles (Map<String, String[]> param) {
+        QueuedFileAdapter[] files = new QueuedFileAdapter[param.size()];
+        Set<String> iter = param.keySet();
+        int num = 0;
+        for (String k : iter) {
+            String[] seq = param.get(k);
+            files[num] = new QueuedFileAdapter(k, seq);
+            num++;
+        }
+        return files;
+    }
 }

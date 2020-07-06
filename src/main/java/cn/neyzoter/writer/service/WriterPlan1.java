@@ -8,7 +8,6 @@ import cn.neyzoter.writer.task.WriterTask4Plan1;
 /**
  * 写数据方案1
  * @author scc
- * @date 2020-7-6
  */
 public class WriterPlan1 {
     private Thread[] ts;
@@ -19,7 +18,7 @@ public class WriterPlan1 {
         ts = new Thread[tn];
         long time = System.currentTimeMillis();
         for (int i = 0; i < tn; i ++) {
-            ts[i] = new Thread(new WriterTask4Plan1(String.valueOf(i + 1), files,  time + 1000, time + 1000 * 10));
+            ts[i] = new Thread(new WriterTask4Plan1(String.valueOf(i + 1), files,  time + Contant.START_AFTER, time + Contant.END_AFTER));
         }
     }
 

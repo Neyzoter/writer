@@ -8,7 +8,6 @@ import java.util.concurrent.LinkedBlockingQueue;
 /**
  * 文件写入器管理
  * @author scc
- * @date 2020-7-6
  */
 public class FileWriterKeeper {
     private LinkedBlockingQueue<FileWriter> writers;

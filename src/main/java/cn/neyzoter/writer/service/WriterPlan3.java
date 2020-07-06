@@ -9,12 +9,12 @@ import cn.neyzoter.writer.task.WriterTask4Plan1;
  * 写数据方案3
  * @author scc
  */
-public class WriterPlan2 {
+public class WriterPlan3 {
     private Thread[] ts;
     private File0[] files;
-    public WriterPlan2() {
+    public WriterPlan3() {
         int tn = Contant.THREAD_NUM;
-        files = Files.createFiles(File0Utils.fileParam());
+        files = Files.createQuedFiles(File0Utils.fileParam());
         ts = new Thread[tn];
         long time = System.currentTimeMillis();
         for (int i = 0; i < tn; i ++) {

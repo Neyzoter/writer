@@ -5,7 +5,7 @@ import cn.neyzoter.writer.contant.Contant;
 import cn.neyzoter.writer.manager.File0;
 
 /**
- * 线程任务1<br/>
+ * 线程任务2<br/>
  * 每次写入后等待到一个阈值后flush
  * @author scc
  */

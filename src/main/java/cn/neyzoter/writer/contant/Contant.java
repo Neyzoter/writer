@@ -18,4 +18,14 @@ public class Contant {
      * 页表大小
      */
     public static final int PAGE_SIZE = 4096;
+
+    /**
+     * 开始
+     */
+    public static final int START_AFTER = 1000;
+
+    /**
+     * 结束
+     */
+    public static final int END_AFTER = 10 * 1000;
 }
