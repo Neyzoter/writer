@@ -1,10 +1,12 @@
 
 target/
 
-files/
-
-!files/*.sh
-!files/info/
+files/f1
+files/f2
+files/f3
+files/test*/f1
+files/test*/f2
+files/test*/f3
 
 *.jar
 
