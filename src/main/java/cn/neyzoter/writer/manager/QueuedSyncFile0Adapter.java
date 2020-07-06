@@ -4,11 +4,11 @@ package cn.neyzoter.writer.manager;
  * 队列化的File0
  * @author scc
  */
-public class QueuedFile0Adapter extends File0 {
+public class QueuedSyncFile0Adapter extends SyncFile0 {
 
     private StringBuilder sb;
 
-    public QueuedFile0Adapter(String path, String[] s) {
+    public QueuedSyncFile0Adapter(String path, String[] s) {
         super(path, s);
         sb = new StringBuilder();
     }

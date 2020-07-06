@@ -1,6 +1,7 @@
 package cn.neyzoter.writer.manager;
 
 import java.util.*;
+import java.util.concurrent.locks.Lock;
 
 /**
  * 文件方法
@@ -8,38 +9,57 @@ import java.util.*;
  */
 public class Files {
     /**
-     * 创建文件读写器
+     * 创建Sync文件读写器
      * @param param 参数
      *              key：地址
      *              val：数字序列
      * @return 文件数组
      */
-    public static File0[] createFiles (Map<String, String[]> param) {
-        File0[] files = new File0[param.size()];
+    public static SyncFile0[] createSyncFiles(Map<String, String[]> param) {
+        SyncFile0[] files = new SyncFile0[param.size()];
         Set<String> iter = param.keySet();
         int num = 0;
         for (String k : iter) {
             String[] seq = param.get(k);
-            files[num] = new File0(k, seq);
+            files[num] = new SyncFile0(k, seq);
             num++;
         }
         return files;
     }
 
     /**
-     * 创建文件读写器
+     * 创建Queued文件读写器
      * @param param 参数
      *              key：地址
      *              val：数字序列
      * @return 文件数组
      */
-    public static QueuedFileAdapter[] createQuedFiles (Map<String, String[]> param) {
-        QueuedFileAdapter[] files = new QueuedFileAdapter[param.size()];
+    public static QueuedSyncFile0Adapter[] createQuedFiles (Map<String, String[]> param) {
+        QueuedSyncFile0Adapter[] files = new QueuedSyncFile0Adapter[param.size()];
         Set<String> iter = param.keySet();
         int num = 0;
         for (String k : iter) {
             String[] seq = param.get(k);
-            files[num] = new QueuedFileAdapter(k, seq);
+            files[num] = new QueuedSyncFile0Adapter(k, seq);
+            num++;
+        }
+        return files;
+    }
+
+    /**
+     * 创建Lock文件读写器
+     * @param param 参数
+     *              key：地址
+     *              val：数字序列
+     * @return 文件数组
+     */
+    public static LockFile0[] createLockFiles(Map<String, String[]> param) {
+        LockFile0[] files = new LockFile0[param.size()];
+        Set<String> iter = param.keySet();
+        int num = 0;
+        for (String k : iter) {
+            String[] seq = param.get(k);
+            files[num] = new LockFile0(k, seq);
             num++;
         }
         return files;

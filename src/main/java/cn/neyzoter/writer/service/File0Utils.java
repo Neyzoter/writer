@@ -16,13 +16,13 @@ public class File0Utils {
      */
     public static Map<String, String[]> fileParam () {
         Map<String, String[]> fileParam = new HashMap<>();
-        String basePath = "/home/scc/code/java/armee-proj/writer/files/";
-        String[] seq1 = {"1", "2", "3", "4", "5"};
-        String[] seq2 = {"5", "4", "3", "2", "1"};
-        String[] seq3 = {"1", "3", "4", "2", "5"};
-        fileParam.put(basePath + "f1", seq1);
-        fileParam.put(basePath + "f2", seq2);
-        fileParam.put(basePath + "f3", seq3);
+        String basePath = Contant.FILE_BASE_PATH;
+        String[] seq1 = Contant.FILE1_SEQ;
+        String[] seq2 = Contant.FILE2_SEQ;
+        String[] seq3 = Contant.FILE3_SEQ;
+        fileParam.put(basePath + Contant.FILE1_NAME, seq1);
+        fileParam.put(basePath + Contant.FILE2_NAME, seq2);
+        fileParam.put(basePath + Contant.FILE3_NAME, seq3);
         assert Contant.FILE_NUM == fileParam.size();
         return fileParam;
     }

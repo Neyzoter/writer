@@ -9,7 +9,7 @@ import cn.neyzoter.writer.manager.File0If;
  * 每次写入后等待到一个阈值后flush
  * @author scc
  */
-public class WriterTask4Plan2 implements Runnable{
+public class WriterTask2 implements Runnable{
 
     private String content;
     private File0If[] files;
@@ -21,7 +21,7 @@ public class WriterTask4Plan2 implements Runnable{
      * @param c 写入内容
      * @param f 文件
      */
-    public WriterTask4Plan2(String c, File0If[] f, long s, long e) {
+    public WriterTask2(String c, File0If[] f, long s, long e) {
         content = c;
         files = f;
         run = true;

@@ -10,7 +10,7 @@ import java.util.HashMap;
  * 每次写入后马上flush
  * @author scc
  */
-public class WriterTask4Plan1 implements Runnable{
+public class WriterTask1 implements Runnable{
 
     private String content;
     private File0If[] files;
@@ -22,7 +22,7 @@ public class WriterTask4Plan1 implements Runnable{
      * @param c 写入内容
      * @param f 文件
      */
-    public WriterTask4Plan1(String c, File0If[] f, long s, long e) {
+    public WriterTask1(String c, File0If[] f, long s, long e) {
         content = c;
         files = f;
         run = true;

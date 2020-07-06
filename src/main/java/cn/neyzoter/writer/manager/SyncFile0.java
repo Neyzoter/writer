@@ -4,10 +4,10 @@ import java.io.File;
 import java.io.FileWriter;
 
 /**
- * 文件0
+ * 基于synchronized的文件
  * @author scc
  */
-public class File0 implements File0If {
+public class SyncFile0 implements File0If {
     protected FileWriter writer;
     /**
      * 顺序
@@ -21,10 +21,10 @@ public class File0 implements File0If {
     protected int blockedNum;
 
     /**
-     * 文件1
+     * 文件
      * @param path 路径
      */
-    public File0(String path, String[] s) {
+    public SyncFile0(String path, String[] s) {
         ptr = 0;
         blockedNum = 0;
         SEQ = s;
