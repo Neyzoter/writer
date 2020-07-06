@@ -2,7 +2,7 @@ package cn.neyzoter.writer.task;
 
 
 import cn.neyzoter.writer.contant.Contant;
-import cn.neyzoter.writer.manager.File0;
+import cn.neyzoter.writer.manager.File0If;
 
 /**
  * 线程任务2<br/>
@@ -12,7 +12,7 @@ import cn.neyzoter.writer.manager.File0;
 public class WriterTask4Plan2 implements Runnable{
 
     private String content;
-    private File0[] files;
+    private File0If[] files;
     private boolean run;
     private long startTime;
     private long endTime;
@@ -21,7 +21,7 @@ public class WriterTask4Plan2 implements Runnable{
      * @param c 写入内容
      * @param f 文件
      */
-    public WriterTask4Plan2(String c, File0[] f, long s, long e) {
+    public WriterTask4Plan2(String c, File0If[] f, long s, long e) {
         content = c;
         files = f;
         run = true;
@@ -37,7 +37,7 @@ public class WriterTask4Plan2 implements Runnable{
         }
         int checkNum = Contant.PAGE_SIZE;
         while (System.currentTimeMillis() < endTime && run) {
-            for (File0 f : files) {
+            for (File0If f : files) {
                 f.writeCheckFlush(content, checkNum);
             }
         }

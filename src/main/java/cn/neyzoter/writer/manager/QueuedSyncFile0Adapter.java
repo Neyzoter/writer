@@ -1,44 +1,19 @@
 package cn.neyzoter.writer.manager;
 
-import java.io.File;
-import java.io.FileWriter;
-
 /**
- * 文件0
+ * 队列化的File0
  * @author scc
  */
-public class File0 {
-    protected FileWriter writer;
-    /**
-     * 顺序
-     */
-    protected String[] SEQ;
-    /**
-     * 下一个数据的指针
-     */
-    protected int ptr;
+public class QueuedFile0Adapter extends File0 {
 
-    protected int blockedNum;
+    private StringBuilder sb;
 
-    /**
-     * 文件1
-     * @param path 路径
-     */
-    public File0(String path, String[] s) {
-        ptr = 0;
-        blockedNum = 0;
-        SEQ = s;
-        try {
-            writer = new FileWriter(new File(path), true);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public QueuedFile0Adapter(String path, String[] s) {
+        super(path, s);
+        sb = new StringBuilder();
     }
-    /**
-     * 只写不刷新，并且检查是否需要刷新
-     * @param content 内容
-     * @return 写入成功
-     */
+
+    @Override
     public synchronized boolean writeCheckFlush(String content, int checkNum) {
         if (blockedNum >= checkNum) {
             return writeAndFlush(content);
@@ -46,17 +21,16 @@ public class File0 {
             return write(content);
         }
     }
-    /**
-     * 写入并刷新数据到文件
-     * @param content 内容
-     * @return 写入成功
-     */
+
+    @Override
     public synchronized boolean writeAndFlush(String content) {
         try {
             if (write(content)) {
+                writer.append(sb.toString());
                 writer.flush();
                 // 清零
                 blockedNum = 0;
+                sb = new StringBuilder();
                 return true;
             }
         } catch (Exception e) {
@@ -65,11 +39,7 @@ public class File0 {
         return false;
     }
 
-    /**
-     * 只写不刷新
-     * @param content 内容
-     * @return 写入成功
-     */
+    @Override
     public synchronized boolean write(String content) {
         try {
             if (!SEQ[ptr].equals(content)) {
@@ -77,13 +47,12 @@ public class File0 {
             }
             ptr = (ptr + 1) % SEQ.length;
             blockedNum ++;
-            writer.append(content);
+            sb.append(content);
             return true;
         } catch (Exception e) {
             e.printStackTrace();
         }
         return false;
     }
-
 
 }
