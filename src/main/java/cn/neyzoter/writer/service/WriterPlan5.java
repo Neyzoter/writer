@@ -9,7 +9,7 @@ import cn.neyzoter.writer.task.WriterTask1;
  * 写数据方案1的ReentrantLock版本
  * @author scc
  */
-public class WriterPlan5 {
+public class WriterPlan5 implements WriterPlanIf {
     private Thread[] ts;
     private File0If[] files;
     public WriterPlan5() {
@@ -24,9 +24,7 @@ public class WriterPlan5 {
 
 
 
-    /**
-     * 开始运行
-     */
+    @Override
     public void start () {
         for (Thread t : ts) {
             t.start();

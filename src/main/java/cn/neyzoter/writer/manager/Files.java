@@ -53,13 +53,13 @@ public class Files {
      *              val：数字序列
      * @return 文件数组
      */
-    public static LockFile0[] createLockFiles(Map<String, String[]> param) {
-        LockFile0[] files = new LockFile0[param.size()];
+    public static ReentrantLockTryFile0[] createReentrantLockTryiles(Map<String, String[]> param) {
+        ReentrantLockTryFile0[] files = new ReentrantLockTryFile0[param.size()];
         Set<String> iter = param.keySet();
         int num = 0;
         for (String k : iter) {
             String[] seq = param.get(k);
-            files[num] = new LockFile0(k, seq);
+            files[num] = new ReentrantLockTryFile0(k, seq);
             num++;
         }
         return files;

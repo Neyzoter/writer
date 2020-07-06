@@ -11,7 +11,7 @@ import cn.neyzoter.writer.task.WriterTask2;
  * write等待某个阈值到达后flush
  * @author scc
  */
-public class WriterPlan2 {
+public class WriterPlan2 implements WriterPlanIf {
     private Thread[] ts;
     private File0If[] files;
     public WriterPlan2() {
@@ -25,9 +25,7 @@ public class WriterPlan2 {
     }
 
 
-    /**
-     * 开始运行
-     */
+    @Override
     public void start () {
         for (Thread t : ts) {
             t.start();

@@ -10,7 +10,7 @@ import cn.neyzoter.writer.task.WriterTask1;
  * write后马上flush
  * @author scc
  */
-public class WriterPlan1 {
+public class WriterPlan1 implements WriterPlanIf{
     private Thread[] ts;
     private File0If[] files;
     public WriterPlan1 () {
@@ -25,9 +25,7 @@ public class WriterPlan1 {
 
 
 
-    /**
-     * 开始运行
-     */
+    @Override
     public void start () {
         for (Thread t : ts) {
             t.start();

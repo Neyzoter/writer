@@ -9,12 +9,12 @@ import cn.neyzoter.writer.task.WriterTask1;
  * 写数据方案1的ReentrantLock版本
  * @author scc
  */
-public class WriterPlan4 {
+public class WriterPlan4 implements WriterPlanIf {
     private Thread[] ts;
     private File0If[] files;
     public WriterPlan4() {
         int tn = Contant.THREAD_NUM;
-        files = Files.createLockFiles(File0Utils.fileParam());
+        files = Files.createReentrantLockTryiles(File0Utils.fileParam());
         ts = new Thread[tn];
         long time = System.currentTimeMillis();
         for (int i = 0; i < tn; i ++) {
@@ -24,9 +24,7 @@ public class WriterPlan4 {
 
 
 
-    /**
-     * 开始运行
-     */
+    @Override
     public void start () {
         for (Thread t : ts) {
             t.start();

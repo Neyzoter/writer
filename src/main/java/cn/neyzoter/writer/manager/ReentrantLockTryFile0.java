@@ -5,10 +5,11 @@ import java.io.FileWriter;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * 基于ReentrantLock的文件
+ * 基于ReentrantLock的文件<br/>
+ * 并使用tryLock
  * @author scc
  */
-public class LockFile0 implements File0If {
+public class ReentrantLockTryFile0 implements File0If {
     protected FileWriter writer;
     /**
      * 顺序
@@ -27,7 +28,7 @@ public class LockFile0 implements File0If {
      * 文件
      * @param path 路径
      */
-    public LockFile0(String path, String[] s) {
+    public ReentrantLockTryFile0(String path, String[] s) {
         lock = new ReentrantLock();
         ptr = 0;
         blockedNum = 0;

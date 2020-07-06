@@ -44,18 +44,13 @@ public class SemaphoreFile0 implements File0If {
     @Override
     public boolean writeCheckFlush(String content, int checkNum) {
         try {
-            if (semaphore.tryAcquire()) {
-                boolean result;
-                if (blockedNum >= checkNum) {
-                    result = writeAndFlush(content);
-                } else {
-                    result = write(content);
-                }
-                semaphore.release();
-                return result;
+            boolean result;
+            if (blockedNum >= checkNum) {
+                result = writeAndFlush(content);
             } else {
-                return false;
+                result = write(content);
             }
+            return result;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -65,14 +60,15 @@ public class SemaphoreFile0 implements File0If {
     @Override
     public boolean writeAndFlush(String content) {
         try {
-            if (semaphore.tryAcquire()) {
+            // 由于semaphore不能重入
+            // 所以这里需要结合其他的锁
+            synchronized (writer) {
                 boolean result;
                 if (result = write(content)) {
                     writer.flush();
                     // 清零
                     blockedNum = 0;
                 }
-                semaphore.release();
                 return result;
             }
         } catch (Exception e) {
@@ -84,6 +80,8 @@ public class SemaphoreFile0 implements File0If {
     @Override
     public boolean write(String content) {
         try {
+            // semaphore只能acq一次，所以只有随后可以使用
+            // 上层不可以调用
             if (semaphore.tryAcquire()) {
                 boolean result;
                 if (!SEQ[ptr].equals(content)) {

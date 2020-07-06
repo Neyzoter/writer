@@ -10,7 +10,7 @@ import cn.neyzoter.writer.task.WriterTask2;
  * 使用队列化File0，write写入到StringBuilder，到达阈值后flush
  * @author scc
  */
-public class WriterPlan3 {
+public class WriterPlan3 implements WriterPlanIf {
     private Thread[] ts;
     private File0If[] files;
     public WriterPlan3() {
@@ -27,9 +27,7 @@ public class WriterPlan3 {
     }
 
 
-    /**
-     * 开始运行
-     */
+    @Override
     public void start () {
         for (Thread t : ts) {
             t.start();
