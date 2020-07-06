@@ -17,7 +17,9 @@ public class SyncFile0 implements File0If {
      * 下一个数据的指针
      */
     protected int ptr;
-
+    /**
+     * 被阻塞的字符个数
+     */
     protected int blockedNum;
 
     /**

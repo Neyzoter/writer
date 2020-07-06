@@ -1,10 +1,7 @@
 package cn.neyzoter.writer;
 
 import cn.neyzoter.writer.contant.Contant;
-import cn.neyzoter.writer.service.WriterPlan2;
-import cn.neyzoter.writer.service.WriterPlan3;
-import cn.neyzoter.writer.service.WriterPlan4;
-import cn.neyzoter.writer.service.WriterPlan5;
+import cn.neyzoter.writer.service.WriterPlanIf;
 
 /**
  * 主函数
@@ -14,20 +11,21 @@ import cn.neyzoter.writer.service.WriterPlan5;
 public class RunApp {
     public static void main(String[] args) {
         updateProp();
-//        WriterPlan1 writerPlan1 = new WriterPlan1();
-//        writerPlan1.start();
-//        WriterPlan2 writerPlan2 = new WriterPlan2();
-//        writerPlan2.start();
-
-//        WriterPlan3 writerPlan3 = new WriterPlan3();
-//        writerPlan3.start();
-
-//        WriterPlan4 writerPlan4 = new WriterPlan4();
-//        writerPlan4.start();
-
-        WriterPlan5 writerPlan5 = new WriterPlan5();
-        writerPlan5.start();
-
+        try {
+            // 初始化为方案1
+            String plan = "WriterPlan1";
+            // 如果有参数输入，则更新方案
+            if (args.length > 0) {
+                plan = args[0];
+            }
+            // 通过反射获取一个方案实例
+            Class classType = Class.forName("cn.neyzoter.writer.service." + plan);
+            WriterPlanIf writerPlan = (WriterPlanIf) classType.newInstance();
+            // 开始运行，运行时间大约10秒钟，包括1秒钟的等待时间
+            writerPlan.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**

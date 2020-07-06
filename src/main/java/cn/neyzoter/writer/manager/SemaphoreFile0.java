@@ -15,14 +15,20 @@ public class SemaphoreFile0 implements File0If {
     /**
      * 顺序
      */
-    protected String[] SEQ;
+    private String[] SEQ;
     /**
      * 下一个数据的指针
      */
-    protected int ptr;
+    private int ptr;
 
-    protected int blockedNum;
+    /**
+     * 被阻塞的字符个数
+     */
+    private int blockedNum;
 
+    /**
+     * 信号量
+     */
     private Semaphore semaphore;
 
     /**
@@ -44,11 +50,20 @@ public class SemaphoreFile0 implements File0If {
     @Override
     public boolean writeCheckFlush(String content, int checkNum) {
         try {
-            boolean result;
-            if (blockedNum >= checkNum) {
-                result = writeAndFlush(content);
-            } else {
-                result = write(content);
+            boolean result = false;
+            if (semaphore.tryAcquire()) {
+                if (!SEQ[ptr].equals(content)) {
+                    result = false;
+                } else {
+                    ptr = (ptr + 1) % SEQ.length;
+                    blockedNum ++;
+                    writer.append(content);
+                    result = true;
+                }
+                if (blockedNum >= checkNum) {
+                    writer.flush();
+                }
+                semaphore.release();
             }
             return result;
         } catch (Exception e) {
@@ -60,17 +75,20 @@ public class SemaphoreFile0 implements File0If {
     @Override
     public boolean writeAndFlush(String content) {
         try {
-            // 由于semaphore不能重入
-            // 所以这里需要结合其他的锁
-            synchronized (writer) {
-                boolean result;
-                if (result = write(content)) {
+            boolean result = false;
+            if (semaphore.tryAcquire()) {
+                if (!SEQ[ptr].equals(content)) {
+                    result = false;
+                } else {
+                    ptr = (ptr + 1) % SEQ.length;
+                    writer.append(content);
                     writer.flush();
-                    // 清零
                     blockedNum = 0;
+                    result = true;
                 }
-                return result;
+                semaphore.release();
             }
+            return result;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -81,9 +99,9 @@ public class SemaphoreFile0 implements File0If {
     public boolean write(String content) {
         try {
             // semaphore只能acq一次，所以只有随后可以使用
-            // 上层不可以调用
+            // 上层不可以调用acq
+            boolean result = false;
             if (semaphore.tryAcquire()) {
-                boolean result;
                 if (!SEQ[ptr].equals(content)) {
                     result = false;
                 } else {
@@ -93,8 +111,8 @@ public class SemaphoreFile0 implements File0If {
                     result = true;
                 }
                 semaphore.release();
-                return result;
             }
+            return result;
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -47,19 +47,37 @@ public class Files {
     }
 
     /**
-     * 创建ReentrantLock文件读写器
+     * 创建ReentrantLock文件读写器并使用tryLock函数
      * @param param 参数
      *              key：地址
      *              val：数字序列
      * @return 文件数组
      */
-    public static ReentrantLockTryFile0[] createReentrantLockTryiles(Map<String, String[]> param) {
+    public static ReentrantLockTryFile0[] createReentrantLockTryFiles(Map<String, String[]> param) {
         ReentrantLockTryFile0[] files = new ReentrantLockTryFile0[param.size()];
         Set<String> iter = param.keySet();
         int num = 0;
         for (String k : iter) {
             String[] seq = param.get(k);
             files[num] = new ReentrantLockTryFile0(k, seq);
+            num++;
+        }
+        return files;
+    }
+    /**
+     * 创建ReentrantLock文件读写器并使用lock函数
+     * @param param 参数
+     *              key：地址
+     *              val：数字序列
+     * @return 文件数组
+     */
+    public static ReentrantLockFile0[] createReentrantLockFiles(Map<String, String[]> param) {
+        ReentrantLockFile0[] files = new ReentrantLockFile0[param.size()];
+        Set<String> iter = param.keySet();
+        int num = 0;
+        for (String k : iter) {
+            String[] seq = param.get(k);
+            files[num] = new ReentrantLockFile0(k, seq);
             num++;
         }
         return files;

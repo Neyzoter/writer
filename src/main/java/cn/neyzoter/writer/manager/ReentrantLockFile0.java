@@ -9,7 +9,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * 并使用tryLock
  * @author scc
  */
-public class ReentrantLockTryFile0 implements File0If {
+public class ReentrantLockFile0 implements File0If {
     protected FileWriter writer;
     /**
      * 顺序
@@ -33,7 +33,7 @@ public class ReentrantLockTryFile0 implements File0If {
      * 文件
      * @param path 路径
      */
-    public ReentrantLockTryFile0(String path, String[] s) {
+    public ReentrantLockFile0(String path, String[] s) {
         lock = new ReentrantLock();
         ptr = 0;
         blockedNum = 0;
@@ -47,62 +47,56 @@ public class ReentrantLockTryFile0 implements File0If {
 
     @Override
     public boolean writeCheckFlush(String content, int checkNum) {
+        lock.lock();
         try {
-            if (lock.tryLock()) {
-                boolean result;
-                if (blockedNum >= checkNum) {
-                    result = writeAndFlush(content);
-                } else {
-                    result = write(content);
-                }
-                lock.unlock();
-                return result;
+            if (blockedNum >= checkNum) {
+                return writeAndFlush(content);
             } else {
-                return false;
+                return write(content);
             }
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            lock.unlock();
         }
         return false;
     }
 
     @Override
     public boolean writeAndFlush(String content) {
+        lock.lock();
         try {
-            if (lock.tryLock()) {
-                boolean result;
-                if (result = write(content)) {
-                    writer.flush();
-                    // 清零
-                    blockedNum = 0;
-                }
-                lock.unlock();
-                return result;
+            boolean result;
+            if (result = write(content)) {
+                writer.flush();
+                // 清零
+                blockedNum = 0;
             }
+            return result;
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            lock.unlock();
         }
         return false;
     }
 
     @Override
     public boolean write(String content) {
+        lock.lock();
         try {
-            if (lock.tryLock()) {
-                boolean result;
-                if (!SEQ[ptr].equals(content)) {
-                    result = false;
-                } else {
-                    ptr = (ptr + 1) % SEQ.length;
-                    blockedNum ++;
-                    writer.append(content);
-                    result = true;
-                }
-                lock.unlock();
-                return result;
+            if (!SEQ[ptr].equals(content)) {
+                return false;
+            } else {
+                ptr = (ptr + 1) % SEQ.length;
+                blockedNum ++;
+                writer.append(content);
+                return true;
             }
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            lock.unlock();
         }
         return false;
     }
