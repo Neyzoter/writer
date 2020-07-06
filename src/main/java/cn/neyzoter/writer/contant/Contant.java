@@ -13,4 +13,9 @@ public class Contant {
      * 文件个数
      */
     public static final int FILE_NUM = 3;
+
+    /**
+     * 页表大小
+     */
+    public static final int PAGE_SIZE = 4096;
 }

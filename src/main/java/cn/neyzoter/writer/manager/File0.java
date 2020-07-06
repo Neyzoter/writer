@@ -34,7 +34,18 @@ public class File0 {
             e.printStackTrace();
         }
     }
-
+    /**
+     * 只写不刷新，并且检查是否需要刷新
+     * @param content 内容
+     * @return 写入成功
+     */
+    public synchronized boolean writeCheckFlush(String content, int checkNum) {
+        if (blockedNum >= checkNum) {
+            return writeAndFlush(content);
+        } else {
+            return write(content);
+        }
+    }
     /**
      * 写入并刷新数据到文件
      * @param content 内容
@@ -44,6 +55,8 @@ public class File0 {
         try {
             if (write(content)) {
                 writer.flush();
+                // 清零
+                blockedNum = 0;
                 return true;
             }
         } catch (Exception e) {
@@ -71,4 +84,6 @@ public class File0 {
         }
         return false;
     }
+
+
 }

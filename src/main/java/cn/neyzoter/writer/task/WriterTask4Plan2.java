@@ -1,13 +1,15 @@
-package cn.neyzoter.writer.thread;
+package cn.neyzoter.writer.task;
 
 
+import cn.neyzoter.writer.contant.Contant;
 import cn.neyzoter.writer.manager.File0;
 
 /**
- * 线程任务
+ * 线程任务1<br/>
+ * 每次写入后等待到一个阈值后flush
  * @author scc
  */
-public class WriterTask implements Runnable{
+public class WriterTask4Plan2 implements Runnable{
 
     private String content;
     private File0[] files;
@@ -19,7 +21,7 @@ public class WriterTask implements Runnable{
      * @param c 写入内容
      * @param f 文件
      */
-    public WriterTask (String c, File0[] f, long s, long e) {
+    public WriterTask4Plan2(String c, File0[] f, long s, long e) {
         content = c;
         files = f;
         run = true;
@@ -33,9 +35,10 @@ public class WriterTask implements Runnable{
         while (System.currentTimeMillis() < startTime) {
 
         }
+        int checkNum = Contant.PAGE_SIZE;
         while (System.currentTimeMillis() < endTime && run) {
             for (File0 f : files) {
-                f.writeAndFlush(content);
+                f.writeCheckFlush(content, checkNum);
             }
         }
     }

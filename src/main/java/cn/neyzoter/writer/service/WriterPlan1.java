@@ -3,8 +3,7 @@ package cn.neyzoter.writer.service;
 import cn.neyzoter.writer.contant.Contant;
 import cn.neyzoter.writer.manager.File0;
 import cn.neyzoter.writer.manager.Files;
-import cn.neyzoter.writer.thread.WriterTask;
-import java.util.*;
+import cn.neyzoter.writer.task.WriterTask4Plan1;
 
 /**
  * 写数据方案1
@@ -20,7 +19,7 @@ public class WriterPlan1 {
         ts = new Thread[tn];
         long time = System.currentTimeMillis();
         for (int i = 0; i < tn; i ++) {
-            ts[i] = new Thread(new WriterTask(String.valueOf(i + 1), files,  time + 1000, time + 1000 * 10));
+            ts[i] = new Thread(new WriterTask4Plan1(String.valueOf(i + 1), files,  time + 1000, time + 1000 * 10));
         }
     }
 
