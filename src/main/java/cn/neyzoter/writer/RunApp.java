@@ -4,6 +4,7 @@ import cn.neyzoter.writer.contant.Contant;
 import cn.neyzoter.writer.service.WriterPlan2;
 import cn.neyzoter.writer.service.WriterPlan3;
 import cn.neyzoter.writer.service.WriterPlan4;
+import cn.neyzoter.writer.service.WriterPlan5;
 
 /**
  * 主函数
@@ -21,8 +22,12 @@ public class RunApp {
 //        WriterPlan3 writerPlan3 = new WriterPlan3();
 //        writerPlan3.start();
 
-        WriterPlan4 writerPlan4 = new WriterPlan4();
-        writerPlan4.start();
+//        WriterPlan4 writerPlan4 = new WriterPlan4();
+//        writerPlan4.start();
+
+        WriterPlan5 writerPlan5 = new WriterPlan5();
+        writerPlan5.start();
+
     }
 
     /**

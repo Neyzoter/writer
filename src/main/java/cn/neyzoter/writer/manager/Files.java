@@ -1,7 +1,7 @@
 package cn.neyzoter.writer.manager;
 
-import java.util.*;
-import java.util.concurrent.locks.Lock;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * 文件方法
@@ -47,7 +47,7 @@ public class Files {
     }
 
     /**
-     * 创建Lock文件读写器
+     * 创建ReentrantLock文件读写器
      * @param param 参数
      *              key：地址
      *              val：数字序列
@@ -60,6 +60,25 @@ public class Files {
         for (String k : iter) {
             String[] seq = param.get(k);
             files[num] = new LockFile0(k, seq);
+            num++;
+        }
+        return files;
+    }
+
+    /**
+     * 创建Semapphore文件读写器
+     * @param param 参数
+     *              key：地址
+     *              val：数字序列
+     * @return 文件数组
+     */
+    public static SemaphoreFile0[] createSemaporeFiles(Map<String, String[]> param) {
+        SemaphoreFile0[] files = new SemaphoreFile0[param.size()];
+        Set<String> iter = param.keySet();
+        int num = 0;
+        for (String k : iter) {
+            String[] seq = param.get(k);
+            files[num] = new SemaphoreFile0(k, seq);
             num++;
         }
         return files;
