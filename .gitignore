@@ -3,6 +3,9 @@ target/
 
 files/
 
+!files/*.sh
+!files/info/
+
 *.jar
 
 .idea/
