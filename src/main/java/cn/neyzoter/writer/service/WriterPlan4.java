@@ -6,7 +6,7 @@ import cn.neyzoter.writer.manager.Files;
 import cn.neyzoter.writer.task.WriterFlushTask;
 
 /**
- * 写数据方案1的ReentrantLock版本
+ * 写数据方案1的ReentrantLock版本，并使用tryLock
  * @author scc
  */
 public class WriterPlan4 implements WriterPlanIf {

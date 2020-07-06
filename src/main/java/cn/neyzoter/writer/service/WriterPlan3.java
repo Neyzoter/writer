@@ -3,7 +3,7 @@ package cn.neyzoter.writer.service;
 import cn.neyzoter.writer.contant.Contant;
 import cn.neyzoter.writer.manager.File0If;
 import cn.neyzoter.writer.manager.Files;
-import cn.neyzoter.writer.task.WriterCheckFlushTask;
+import cn.neyzoter.writer.task.WriterFlushTask;
 
 /**
  * 基于Synchronized的写数据方案3<br/>
@@ -22,7 +22,7 @@ public class WriterPlan3 implements WriterPlanIf {
         for (int i = 0; i < tn; i ++) {
             // 必须使用WriterTask4Plan2才可以体现出效果
             // 因为WriterTask4Plan会不停地flush
-            ts[i] = new Thread(new WriterCheckFlushTask(String.valueOf(i + 1), files,  time + Contant.START_AFTER, time + Contant.END_AFTER));
+            ts[i] = new Thread(new WriterFlushTask(String.valueOf(i + 1), files,  time + Contant.START_AFTER, time + Contant.END_AFTER));
         }
     }
 

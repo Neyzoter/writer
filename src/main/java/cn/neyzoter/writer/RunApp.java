@@ -10,16 +10,10 @@ import cn.neyzoter.writer.service.WriterPlanIf;
  */
 public class RunApp {
     public static void main(String[] args) {
-        updateProp();
+        updateProp(args);
         try {
-            // 初始化为方案1
-            String plan = "WriterPlan1";
-            // 如果有参数输入，则更新方案
-            if (args.length > 0) {
-                plan = args[0];
-            }
             // 通过反射获取一个方案实例
-            Class classType = Class.forName("cn.neyzoter.writer.service." + plan);
+            Class classType = Class.forName("cn.neyzoter.writer.service." + Contant.PLAN);
             WriterPlanIf writerPlan = (WriterPlanIf) classType.newInstance();
             // 开始运行，运行时间大约10秒钟，包括1秒钟的等待时间
             writerPlan.start();
@@ -32,11 +26,17 @@ public class RunApp {
      * 更新参数<br/>
      * 参数设置方法-Dfile.basepath=...
      */
-    public static void updateProp () {
-        String path = (String) System.getProperties().get(Contant.FILE_BASE_PATH_VM_OPTION);
-        System.out.println(path);
-        if (path != null) {
-            Contant.setFileBasePath(path);
+    public static void updateProp (String[] args) {
+        int len = args.length > 2 ? 2 : args.length;
+        switch (len) {
+            case 2:
+                Contant.setFileBasePath(args[--len]);
+                System.out.println(Contant.FILE_BASE_PATH);
+            case 1:
+                Contant.setPlan(args[--len]);
+                System.out.println(Contant.PLAN);
+            default:
+                break;
         }
     }
 }

@@ -62,6 +62,7 @@ public class SemaphoreFile0 implements File0If {
                 }
                 if (blockedNum >= checkNum) {
                     writer.flush();
+                    blockedNum = 0;
                 }
                 semaphore.release();
             }

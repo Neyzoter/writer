@@ -9,10 +9,11 @@ public class Contant {
      * 文件存放位置
      */
     public static String FILE_BASE_PATH = "/files/";
+
     /**
-     * 文件存放位置设置名称
+     * 写入器方案
      */
-    public static final String FILE_BASE_PATH_VM_OPTION = "file.basepath";
+    public static String PLAN = "WriterPlan1";
 
     /**
      * 文件1名称
@@ -50,7 +51,7 @@ public class Contant {
     public static final int FILE_NUM = 3;
 
     /**
-     * 页表大小
+     * 物理页的字节大小
      */
     public static final int PAGE_SIZE = 4096;
 
@@ -67,6 +68,9 @@ public class Contant {
 
     public static void setFileBasePath(String p) {
         FILE_BASE_PATH = p;
+    }
+    public static void setPlan(String p) {
+        PLAN = p;
     }
 
 }
