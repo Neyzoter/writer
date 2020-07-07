@@ -34,6 +34,7 @@ public class SemaphoreFile0 implements File0If {
     /**
      * 文件
      * @param path 路径
+     * @param s 字符顺序
      */
     public SemaphoreFile0(String path, String[] s) {
         semaphore = new Semaphore(1);

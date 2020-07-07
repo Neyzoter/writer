@@ -14,6 +14,7 @@ public interface File0If {
     /**
      * 写完后检查是否需要刷新
      * @param content 内容
+     * @param checkNum 刷盘阈值
      * @return 写入成功
      */
     boolean writeCheckFlush(String content, int checkNum);

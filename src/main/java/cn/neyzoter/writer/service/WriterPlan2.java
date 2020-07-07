@@ -7,7 +7,7 @@ import cn.neyzoter.writer.task.WriterCheckFlushTask;
 import cn.neyzoter.writer.task.WriterFlushTask;
 
 /**
- * 基于Synchronized的写数据方案2<br/>
+ * 基于Synchronized的写数据方案2<br>
  * write等待某个阈值到达后flush
  * @author scc
  */

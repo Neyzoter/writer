@@ -6,7 +6,6 @@ import cn.neyzoter.writer.service.WriterPlanIf;
 /**
  * 主函数
  * @author scc
- * @date 2020-7-6
  */
 public class RunApp {
     public static void main(String[] args) {
@@ -23,8 +22,8 @@ public class RunApp {
     }
 
     /**
-     * 更新参数<br/>
-     * 参数设置方法-Dfile.basepath=...
+     * 更新参数<br>
+     * @param args 输入参数
      */
     public static void updateProp (String[] args) {
         int len = args.length > 2 ? 2 : args.length;

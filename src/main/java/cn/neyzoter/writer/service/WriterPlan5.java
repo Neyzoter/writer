@@ -6,7 +6,7 @@ import cn.neyzoter.writer.manager.Files;
 import cn.neyzoter.writer.task.WriterFlushTask;
 
 /**
- * 写数据方案1的ReentrantLock版本<br/>
+ * 写数据方案1的ReentrantLock版本<br>
  * 而且使用阻塞的lock方法
  * @author scc
  */

@@ -6,7 +6,7 @@ import cn.neyzoter.writer.manager.Files;
 import cn.neyzoter.writer.task.WriterFlushTask;
 
 /**
- * 基于Synchronized的写数据方案3<br/>
+ * 基于Synchronized的写数据方案3<br>
  * 使用队列化File0，write写入到StringBuilder，到达阈值后flush
  * @author scc
  */

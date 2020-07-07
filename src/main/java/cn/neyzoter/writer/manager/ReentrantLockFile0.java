@@ -5,7 +5,7 @@ import java.io.FileWriter;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * 基于ReentrantLock的文件<br/>
+ * 基于ReentrantLock的文件<br>
  * 并使用tryLock
  * @author scc
  */
@@ -32,6 +32,7 @@ public class ReentrantLockFile0 implements File0If {
     /**
      * 文件
      * @param path 路径
+     * @param s 字符顺序
      */
     public ReentrantLockFile0(String path, String[] s) {
         lock = new ReentrantLock();

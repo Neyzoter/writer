@@ -5,7 +5,7 @@ import cn.neyzoter.writer.contant.Contant;
 import cn.neyzoter.writer.manager.File0If;
 
 /**
- * 线程任务<br/>
+ * 线程任务<br>
  * 每次写入后等待到一个阈值后flush
  * @author scc
  */
@@ -20,6 +20,8 @@ public class WriterCheckFlushTask implements Runnable{
      * 任务构造器
      * @param c 写入内容
      * @param f 文件
+     * @param s 开始时间
+     * @param e 结束时间
      */
     public WriterCheckFlushTask(String c, File0If[] f, long s, long e) {
         content = c;

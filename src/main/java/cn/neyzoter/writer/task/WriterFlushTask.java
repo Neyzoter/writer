@@ -4,7 +4,7 @@ package cn.neyzoter.writer.task;
 import cn.neyzoter.writer.manager.File0If;
 
 /**
- * 线程任务<br/>
+ * 线程任务<br>
  * 每次写入后马上flush
  * @author scc
  */
@@ -19,6 +19,8 @@ public class WriterFlushTask implements Runnable{
      * 任务构造器
      * @param c 写入内容
      * @param f 文件
+     * @param s 开始时间
+     * @param e 结束时间
      */
     public WriterFlushTask(String c, File0If[] f, long s, long e) {
         content = c;
