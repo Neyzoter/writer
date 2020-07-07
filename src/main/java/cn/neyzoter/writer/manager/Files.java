@@ -9,6 +9,24 @@ import java.util.Set;
  */
 public class Files {
     /**
+     * 创建NonLock文件读写器
+     * @param param 参数
+     *              key：地址
+     *              val：数字序列
+     * @return 文件数组
+     */
+    public static NonLockFile0[] createNonLockFiles(Map<String, String[]> param) {
+        NonLockFile0[] files = new NonLockFile0[param.size()];
+        Set<String> iter = param.keySet();
+        int num = 0;
+        for (String k : iter) {
+            String[] seq = param.get(k);
+            files[num] = new NonLockFile0(k, seq);
+            num++;
+        }
+        return files;
+    }
+    /**
      * 创建Sync文件读写器
      * @param param 参数
      *              key：地址

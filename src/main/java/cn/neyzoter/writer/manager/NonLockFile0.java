@@ -4,10 +4,10 @@ import java.io.File;
 import java.io.FileWriter;
 
 /**
- * 基于synchronized的文件
+ * 无锁化写文件
  * @author scc
  */
-public class SyncFile0 implements File0If {
+public class NonLockFile0 implements File0If {
     protected FileWriter writer;
     /**
      * 顺序
@@ -27,7 +27,7 @@ public class SyncFile0 implements File0If {
      * @param path 路径
      * @param s 字符顺序
      */
-    public SyncFile0(String path, String[] s) {
+    public NonLockFile0(String path, String[] s) {
         ptr = 0;
         blockedNum = 0;
         SEQ = s;
@@ -39,7 +39,7 @@ public class SyncFile0 implements File0If {
     }
 
     @Override
-    public synchronized boolean writeCheckFlush(String content, int checkNum) {
+    public boolean writeCheckFlush(String content, int checkNum) {
         if (blockedNum >= checkNum) {
             return writeAndFlush(content);
         } else {
@@ -48,7 +48,7 @@ public class SyncFile0 implements File0If {
     }
 
     @Override
-    public synchronized boolean writeAndFlush(String content) {
+    public boolean writeAndFlush(String content) {
         try {
             if (write(content)) {
                 writer.flush();
@@ -63,7 +63,7 @@ public class SyncFile0 implements File0If {
     }
 
     @Override
-    public synchronized boolean write(String content) {
+    public boolean write(String content) {
         try {
             if (!SEQ[ptr].equals(content)) {
                 return false;

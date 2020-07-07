@@ -1,10 +1,10 @@
-package cn.neyzoter.writer.contant;
+package cn.neyzoter.writer.constant;
 
 /**
  * 常量
  * @author scc
  */
-public class Contant {
+public class Constant {
     /**
      * 文件存放位置
      */

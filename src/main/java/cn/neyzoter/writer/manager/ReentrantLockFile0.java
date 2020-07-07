@@ -18,7 +18,7 @@ public class ReentrantLockFile0 implements File0If {
     /**
      * 下一个数据的指针
      */
-    private int ptr;
+    private volatile int ptr;
     /**
      * 被阻塞的字符个数
      */
@@ -89,9 +89,9 @@ public class ReentrantLockFile0 implements File0If {
             if (!SEQ[ptr].equals(content)) {
                 return false;
             } else {
-                ptr = (ptr + 1) % SEQ.length;
-                blockedNum ++;
                 writer.append(content);
+                blockedNum ++;
+                ptr = (ptr + 1) % SEQ.length;
                 return true;
             }
         } catch (Exception e) {

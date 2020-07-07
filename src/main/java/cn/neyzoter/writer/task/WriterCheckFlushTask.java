@@ -1,7 +1,7 @@
 package cn.neyzoter.writer.task;
 
 
-import cn.neyzoter.writer.contant.Contant;
+import cn.neyzoter.writer.constant.Constant;
 import cn.neyzoter.writer.manager.File0If;
 
 /**
@@ -37,7 +37,7 @@ public class WriterCheckFlushTask implements Runnable{
         while (System.currentTimeMillis() < startTime) {
 
         }
-        int checkNum = Contant.PAGE_SIZE;
+        int checkNum = Constant.PAGE_SIZE;
         while (System.currentTimeMillis() < endTime && run) {
             for (File0If f : files) {
                 f.writeCheckFlush(content, checkNum);

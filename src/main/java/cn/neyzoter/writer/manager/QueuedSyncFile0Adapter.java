@@ -45,9 +45,9 @@ public class QueuedSyncFile0Adapter extends SyncFile0 {
             if (!SEQ[ptr].equals(content)) {
                 return false;
             }
-            ptr = (ptr + 1) % SEQ.length;
-            blockedNum ++;
             sb.append(content);
+            blockedNum ++;
+            ptr = (ptr + 1) % SEQ.length;
             return true;
         } catch (Exception e) {
             e.printStackTrace();
