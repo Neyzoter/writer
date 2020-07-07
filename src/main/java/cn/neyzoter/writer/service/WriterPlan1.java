@@ -23,8 +23,6 @@ public class WriterPlan1 implements WriterPlanIf{
         }
     }
 
-
-
     @Override
     public void start () {
         for (Thread t : ts) {
